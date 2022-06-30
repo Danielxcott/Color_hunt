@@ -39,6 +39,12 @@ sliderContainersClose.forEach((closeBtn,index)=>{
     })
 })
 
+lockBtn.forEach((lock,index)=>{
+    lock.addEventListener("click",(e)=>{
+        lockFeature(e,index);
+    })
+})
+
 generateBtn.addEventListener("click",randomColor);
 
 //Function
@@ -61,7 +67,13 @@ function randomColor() {
   colorDivs.forEach((div, index) => {
     let text = div.children[0];
     let randomColor = generateHex();
-    inititalColors.push(chroma(randomColor).hex());
+
+    if(div.classList.contains('locked')){
+        inititalColors.push(text.innerText);
+        return; //during a locked state, the color will not change and the following code won't be excuted
+    }else{
+        inititalColors.push(chroma(randomColor).hex());
+    }
 
     text.innerText = randomColor;
     div.style.backgroundColor = randomColor;
@@ -202,4 +214,15 @@ function openAdjustPanel(index){
 //Close Adjustment Panel
 function closeAdjustPanel(index){
     sliderContainers[index].classList.remove("active");
+}
+
+//Lock Feature
+function lockFeature(e,index){
+const lockSVG = e.target.children[0];
+lockBtn[index].parentElement.parentElement.classList.toggle("locked")
+if(lockSVG.classList.contains('fa-lock-open')){
+    e.target.innerHTML = '<i class="fas fa-lock"></i>';
+} else {
+  e.target.innerHTML = '<i class="fas fa-lock-open"></i>';
+}
 }
