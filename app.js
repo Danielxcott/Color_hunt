@@ -6,6 +6,8 @@ const adjustBtn = document.querySelectorAll(".adjust");
 const closeAdjusts = document.querySelectorAll(".close-adjustment");
 const sliderContainers = document.querySelectorAll(".sliders");
 const sliderContainersClose = document.querySelectorAll(".close");
+const lockBtn = document.querySelectorAll(".lock");
+const generateBtn = document.querySelector(".generate");
 let inititalColors;
 
 //Event Listener
@@ -36,6 +38,8 @@ sliderContainersClose.forEach((closeBtn,index)=>{
         closeAdjustPanel(index);
     })
 })
+
+generateBtn.addEventListener("click",randomColor);
 
 //Function
 
@@ -72,6 +76,11 @@ function randomColor() {
     colorsSlide(color, hue, bright, saturate);
   });
   resetInput();
+  
+//   adjustBtn.forEach((btn,index)=>{
+//     checkTextContrast(inititalColors[index],lockBtn[index]);
+//     checkTextContrast(inititalColors[index],adjustBtn[index])
+//   })
 }
 randomColor();
 
