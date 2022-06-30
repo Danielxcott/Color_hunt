@@ -2,6 +2,7 @@
 const colorDivs = document.querySelectorAll(".color");
 const hexText = document.querySelectorAll(".color h2");
 const slider = document.querySelectorAll("input[type=range]");
+let inititalColors;
 
 //Event Listener
 slider.forEach((slide) => {
@@ -30,9 +31,11 @@ function generateHex() {
 }
 
 function randomColor() {
+    inititalColors=[];
   colorDivs.forEach((div, index) => {
     let text = div.children[0];
     let randomColor = generateHex();
+    inititalColors.push(chroma(randomColor).hex());
 
     text.innerText = randomColor;
     div.style.backgroundColor = randomColor;
@@ -46,6 +49,7 @@ function randomColor() {
     const saturate = colorSlide[2];
     colorsSlide(color, hue, bright, saturate);
   });
+  resetInput();
 }
 randomColor();
 
@@ -93,7 +97,7 @@ function hslControls(e) {
   const bright = sliders[1];
   const saturate = sliders[2];
 
-  let text = colorDivs[index].querySelector("h2").innerText;
+  let text = inititalColors[index];
   let colors = chroma(text)
   .set("hsl.s", saturate.value)
   .set("hsl.l", bright.value)
@@ -113,4 +117,27 @@ function updateTextUI(index){
     // for(icon of icons){
     //     checkTextContrast(color,icon)
     // }
+} 
+
+//ResetSlider;
+function resetInput(){
+    const sliders = document.querySelectorAll(".sliders input");
+    sliders.forEach((slide)=>{
+        if(slide.name === "hue"){
+            const hueColor = inititalColors[slide.getAttribute("data-hue")];
+            const huevalue = chroma(hueColor).hsl()[0];//0 for h 1 for s and 2 for l
+            slide.value = Math.floor(huevalue);
+
+        }else if(slide.name === "saturation"){
+            const satColor = inititalColors[slide.getAttribute("data-sat")];
+            const satvalue = chroma(satColor).hsl()[1];
+            slide.value = satvalue.toFixed(2);
+
+        }else if(slide.name === "brightness"){
+            const brightColor = inititalColors[slide.getAttribute("data-bright")];
+            const brightvalue = chroma(brightColor).hsl()[2]; 
+            slide.value = brightvalue.toFixed(2);
+        }
+
+    })
 }
