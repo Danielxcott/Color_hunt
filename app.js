@@ -9,6 +9,8 @@ const sliderContainersClose = document.querySelectorAll(".close");
 const lockBtn = document.querySelectorAll(".lock");
 const generateBtn = document.querySelector(".generate");
 let inititalColors;
+//For localstorage
+let savePalette=[];
 
 //Event Listener
 slider.forEach((slide) => {
@@ -226,3 +228,29 @@ if(lockSVG.classList.contains('fa-lock-open')){
   e.target.innerHTML = '<i class="fas fa-lock-open"></i>';
 }
 }
+
+//Implement Save to palette and localstorage 
+const saveBtn = document.querySelector(".save");
+const submitSave = document.querySelector(".submit-save"); 
+const closeSave = document.querySelector(".close-save");
+const saveContainer = document.querySelector(".save-container");
+const saveInput = document.querySelector(".save-container input");
+
+//Event Listener
+saveBtn.addEventListener("click",openPalette);
+closeSave.addEventListener("click",closePalette);
+submitSave.addEventListener("click",savedPalette);
+
+//Function
+function openPalette(e){
+    const popup = saveContainer.children[0];
+    saveContainer.classList.add("active")
+    popup.classList.add("active");
+}
+
+function closePalette(e){
+    const popup = saveContainer.children[0];
+    saveContainer.classList.remove("active")
+    popup.classList.remove("active");
+}
+
