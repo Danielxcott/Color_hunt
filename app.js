@@ -254,3 +254,30 @@ function closePalette(e){
     popup.classList.remove("active");
 }
 
+//To local storage
+function savedPalette(e){
+    const popup = saveContainer.children[0];
+    saveContainer.classList.remove("active")
+    popup.classList.remove("active");
+    const colors =[];
+    const name = saveInput.value;
+    hexText.forEach((text)=>{
+        colors.push(text.innerText);
+    });
+    let paletteNr = savePalette.length;
+    const paletteObj = {name,colors,num:paletteNr};
+    savePalette.push(paletteObj);
+    savetoLocal(paletteObj);
+    saveInput.value="";
+}
+
+function savetoLocal(obj){
+    let localPalettes;
+    if(localStorage.getItem("palettes") === null){
+        localPalettes=[];
+    }else{
+        localPalettes = JSON.parse(localStorage.getItem("palettes"));
+    }
+    localPalettes.push(obj);
+    localStorage.setItem('palettes',JSON.stringify(localPalettes));
+}
