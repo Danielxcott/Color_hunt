@@ -41,11 +41,11 @@ i{
     width: 80%;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
-    /* transform: translateY(120px); */
+    transform: translateY(120px);
     transition: all 0.5s ease-in-out;
-    /* pointer-events: none; */
+    pointer-events: none; 
     overflow: hidden;
-    /* opacity: 0; */
+    opacity: 0;
 }
 .sliders.active{
     pointer-events: all ;
@@ -137,6 +137,7 @@ input[type=range]::-webkit-slider-thumb {
     align-items: center;
     opacity: 0;
     pointer-events: none;
+    transition: all 0.5s ease-in-out;
 }
 
 .copy-popup{

@@ -2,6 +2,10 @@
 const colorDivs = document.querySelectorAll(".color");
 const hexText = document.querySelectorAll(".color h2");
 const slider = document.querySelectorAll("input[type=range]");
+const adjustBtn = document.querySelectorAll(".adjust");
+const closeAdjusts = document.querySelectorAll(".close-adjustment");
+const sliderContainers = document.querySelectorAll(".sliders");
+const sliderContainersClose = document.querySelectorAll(".close");
 let inititalColors;
 
 //Event Listener
@@ -18,6 +22,18 @@ colorDivs.forEach((div,index)=>{
 hexText.forEach((text)=>{
     text.addEventListener("click",()=>{
         copyClipboard(text);
+    })
+})
+
+adjustBtn.forEach((button,index)=>{
+    button.addEventListener("click",()=>{
+        openAdjustPanel(index);
+    })
+})
+
+sliderContainersClose.forEach((closeBtn,index)=>{
+    closeBtn.addEventListener("click",()=>{
+        closeAdjustPanel(index);
     })
 })
 
@@ -159,12 +175,22 @@ function copyClipboard(text){
     document.body.removeChild(el);
 
     const popup = document.querySelector(".copy-container");
-    
+
     popup.classList.add('active');
     popup.children[0].classList.add("active");
 
     setTimeout(()=>{
         popup.classList.remove('active');
         popup.children[0].classList.remove("active");
-    },380)
+    },680)
+}
+
+//Open Adjustment Panel
+function openAdjustPanel(index){
+    sliderContainers[index].classList.toggle("active");
+}
+
+//Close Adjustment Panel
+function closeAdjustPanel(index){
+    sliderContainers[index].classList.remove("active");
 }
