@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.1.1"
+    "@fortawesome/fontawesome-free": "^6.1.1",
+    "chroma-js": "^2.4.2"
   }
 }
