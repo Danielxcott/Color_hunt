@@ -15,6 +15,12 @@ colorDivs.forEach((div,index)=>{
     });
 })
 
+hexText.forEach((text)=>{
+    text.addEventListener("click",()=>{
+        copyClipboard(text);
+    })
+})
+
 //Function
 
 //Color Generator
@@ -104,6 +110,7 @@ function hslControls(e) {
     .set("hsl.h", hue.value)
 
     colorDivs[index].style.backgroundColor = colors;
+    colorsSlide(colors,hue,bright,saturate);
 }
 
 //Update Text 
@@ -140,4 +147,24 @@ function resetInput(){
         }
 
     })
+}
+
+//Copy to clipboard;
+function copyClipboard(text){
+    const el = document.createElement("textarea");
+    el.innerText = text.innerText;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+
+    const popup = document.querySelector(".copy-container");
+    
+    popup.classList.add('active');
+    popup.children[0].classList.add("active");
+
+    setTimeout(()=>{
+        popup.classList.remove('active');
+        popup.children[0].classList.remove("active");
+    },380)
 }
